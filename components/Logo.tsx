@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
 const Logo = () => {
   return (
-    <div>Logo</div>
+    <Link href={'/'} className='font-bold text-3xl text-orange-600 hover:cursor-pointer'> Codeflix </Link>
   )
 }
 
