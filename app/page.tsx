@@ -7,6 +7,8 @@ import { HiCursorClick } from 'react-icons/hi';
 import { TbArrowBounce } from 'react-icons/tb';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Separator } from '@/components/ui/separator';
+import CreateFormBtn from '@/components/CreateFormBtn';
 
 export default function Home() {
   return (
@@ -15,6 +17,11 @@ export default function Home() {
       <Suspense fallback={<StatsCard loading={true} />}>
         <CardStatsWrapper />
       </Suspense>
+      <Separator className='my-6'/>
+      <h2 className='text-2xl font-bold text-orange-600 '>Your Forms</h2>
+      <Separator  className='my-6'/>
+      <CreateFormBtn />
+
     </div>
   );
 }
@@ -54,7 +61,7 @@ function StatsCard(props: StatsCardProps) {
         title='Submission Rate '
         icon={<HiCursorClick className='text-green-600' />}
         helperText="Visits that results in form submission"
-        value={data?.visits.toLocaleString() || ""}
+        value={data?.visits.toLocaleString() + "%" || ""}
         loading={loading}
         className='shadow-md shadow-green-600'
       />
@@ -62,7 +69,7 @@ function StatsCard(props: StatsCardProps) {
         title='Bounce Rate '
         icon={<TbArrowBounce className='text-purple-600' />}
         helperText="Visits with out interaction"
-        value={data?.visits.toLocaleString() || ""}
+        value={data?.visits.toLocaleString() + "%"|| ""}
         loading={loading}
         className='shadow-md shadow-purple-600'
       />
