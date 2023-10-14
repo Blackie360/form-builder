@@ -34,12 +34,12 @@ const CreateFormBtn = () => {
 
  async function onSubmit(values: formSchemaType){
         try{
-            await CreateForm(values);
+            const formId = await CreateForm(values);
             toast({
                 title: "Success",
                 description: "Form generated Successfully "
             })
-
+                console.log("FORM ID", formId);
         } catch (error) {
             toast({
                 title: "Error",
