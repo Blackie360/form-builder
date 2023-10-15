@@ -3,6 +3,7 @@ import { formSchema, formSchemaType } from "@/schemas/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { ImSpinner9 } from "react-icons/im";
+import {BsFileEarmarkPlusFill} from "react-icons/bs";
 import { Button } from "./ui/button";
 import {
     Dialog,
@@ -52,7 +53,8 @@ const CreateFormBtn = () => {
   return (
     <Dialog>
         <DialogTrigger asChild>
-            <Button>Generate new form </Button>
+            <Button  className="group border  border-primary/20 h-[190px] items-center justify-center flex flex-col hover:border-primary hover:cursor-pointer border-dashed gap-4 ">
+            <BsFileEarmarkPlusFill className="h-8 w-8 text-muted-foreground hover:text-red-600 text-purple-600" />                Generate new form </Button>
         </DialogTrigger>
         <DialogContent>
         <DialogHeader>

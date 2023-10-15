@@ -20,7 +20,9 @@ export default function Home() {
       <Separator className='my-6'/>
       <h2 className='text-2xl font-bold text-orange-600 '>Your Forms</h2>
       <Separator  className='my-6'/>
-      <CreateFormBtn />
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 '>
+        <CreateFormBtn />
+        </div>
 
     </div>
   );
@@ -110,4 +112,4 @@ function SingleStatsCard({
       </CardContent>
     </Card>
   );
-}
+} 
