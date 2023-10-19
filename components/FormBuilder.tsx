@@ -28,7 +28,7 @@ const FormBuilder = ({form}: {
           )}
           </div>
       </nav>
-      <div className="flex w-full   flex-grow items-center justify-center relative overflow-y-auto h-[200px] bg-accent bg-[url('/food.svg')] dark:bg-[url('/food-dark.svg')]">
+      <div className="flex w-full   flex-grow items-center justify-center relative overflow-y-auto h-auto bg-accent bg-[url('/food.svg')] dark:bg-[url('/food-dark.svg')]">
             <Designer />
       </div>
     </main>
