@@ -13,9 +13,7 @@ const ThemeSwitcher = () => {
   return (
    <Tabs defaultValue={theme} >
     <TabsList className='border flex gap-4 md:gap-8'>
-        <TabsTrigger value='light' onClick={() => setTheme("light")} className='w-1/3 md:w-auto'>
-            <SunIcon className='h-[1.2rem] w-[1.2rem]'/>
-        </TabsTrigger>
+        
         <TabsTrigger value='dark' onClick={() => setTheme("dark")} className='w-1/3 md:w-auto'>
             <MoonIcon className='h-[1.2rem] w-[1.2rem] rotate-90 transition-all dark:rotate-0'/>
         </TabsTrigger>
