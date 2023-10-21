@@ -11,7 +11,7 @@ import { BiSolidTrash } from 'react-icons/bi';
 
 const Designer = () => {
 
-    const {elements, addElement} = useDesigner();
+    const {elements, addElement, selectedElement, setSelectedElement} = useDesigner();
 
     const droppable = useDroppable({
         id: "designer-drop-area",
@@ -42,7 +42,11 @@ const Designer = () => {
 
   return (
     <div className=' flex w-full h-full'>
-        <div className="p-4 w-full">
+        <div className="p-4 w-full"
+        onClick={() => {
+          if (selectedElement) setSelectedElement(null);
+        }}
+        >
         <div
           ref={droppable.setNodeRef}
           className={cn(
@@ -74,7 +78,7 @@ const Designer = () => {
 
 function DesignerElementWrapper({element}:{element: FormElementInstance}){
 
-  const {removeElement} = useDesigner();
+  const {removeElement, selectedElement, setSelectedElement} = useDesigner();
 
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
 
@@ -108,6 +112,7 @@ function DesignerElementWrapper({element}:{element: FormElementInstance}){
 
   if(draggable.isDragging) return null;
 
+
    const DesignerElement = FormElements[element.type].designerComponent;
 
 
@@ -125,6 +130,11 @@ function DesignerElementWrapper({element}:{element: FormElementInstance}){
     onMouseLeave={() => {
       setMouseIsOver(false);
     }}
+    onClick={(e) => {
+      e.stopPropagation();
+      setSelectedElement(element);
+    
+    }}
     
     >
     <div
@@ -138,7 +148,9 @@ function DesignerElementWrapper({element}:{element: FormElementInstance}){
       <div className="absolute right-0 h-full">
       <Button className='flex justify-items-center h-full border rounded-md rounded-l-none  bg-orange-500'
       variant={'outline'}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation();
+
         removeElement(element.id);
       }}>
         <BiSolidTrash className='h-6 w-6' />
