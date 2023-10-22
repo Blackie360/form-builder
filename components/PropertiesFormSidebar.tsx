@@ -4,6 +4,7 @@ import { FormElements } from './FormElements';
 import { Button } from './ui/button';
 import { AiOutlineClose } from 'react-icons/ai';
 import { set } from 'date-fns';
+import { Separator } from '@radix-ui/react-separator';
 
 const PropertiesFormSidebar = () => {
     const { selectedElement, setSelectedElement } = useDesigner();
@@ -23,6 +24,7 @@ if(!selectedElement) return null;
             <AiOutlineClose />
         </Button>
     </div>
+    <Separator className='mb-4' />
       <PropertiesForm elementInstance={selectedElement} />
   </div>);
 }
