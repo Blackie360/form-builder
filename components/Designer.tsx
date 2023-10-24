@@ -21,7 +21,6 @@ const Designer = () => {
         },
     });
 
-    console.log("ELEMENTS",elements )
 
     useDndMonitor({
       onDragEnd: (event: DragEndEvent) =>{
@@ -29,14 +28,44 @@ const Designer = () => {
         if(!active || !over) return;
 
         const isDesignerBtnElement = active.data?.current?.isDesignerBtnElement;
-        if (isDesignerBtnElement) {
+        const isDroppingOverDesignerDropArea = over.data?.current?.isDesignerDropArea;
+//first scenario dropping elements 
+        if (isDesignerBtnElement && isDroppingOverDesignerDropArea) {
           const type = active.data?.current?.type;
           const newElement = FormElements[type as ElementsType].construct(idGenerator());  
           
-          addElement(0, newElement);
+          addElement(elements.length, newElement);
+          return;
           }
-        console.log("DRAG END", event);
+       
+          const isDroppingOverDesignerElementTopHalf = over.data?.current?.isTopHalfDesignerElement;
 
+          const isDroppingOverDesignerElementBottomHalf = over.data?.current?.isBottomHalfDesignerElement;
+
+          const  isDroppingOverDesignerElement = isDroppingOverDesignerElementTopHalf | isDroppingOverDesignerElementBottomHalf;
+
+          const droppingSidebarBtnOverDesignerElement = isDesignerBtnElement &&  isDroppingOverDesignerElement;
+//second scerion on dragging elements
+
+          if(droppingSidebarBtnOverDesignerElement){
+            const type = active.data?.current?.type;
+          const newElement = FormElements[type as ElementsType].construct(idGenerator());  
+          const overId = over.data?.current?.elementId
+          const overElementIndex = elements.findIndex((el) => el.id === overId);
+          if(overElementIndex === -1) {
+            throw new Error("Element not found");
+          }
+
+         let indexForNewElement = overElementIndex; //if dropping over top half of element
+          if (isDroppingOverDesignerElementBottomHalf){
+            indexForNewElement = overElementIndex + 1; //if dropping over bottom half of element
+          }
+
+          addElement(indexForNewElement, newElement);
+          return;
+
+          }
+          //third scenario on dragging elements
       },
     });
 
