@@ -8,10 +8,11 @@ import useDesigner from './hooks/useDesigner';
 import { idGenerator } from '@/lib/idGenerator';
 import { Button } from './ui/button';
 import { BiSolidTrash } from 'react-icons/bi';
+import { el } from 'date-fns/locale';
 
 const Designer = () => {
 
-    const {elements, addElement, selectedElement, setSelectedElement} = useDesigner();
+    const {elements, addElement, selectedElement, setSelectedElement, removeElement} = useDesigner();
 
     const droppable = useDroppable({
         id: "designer-drop-area",
@@ -66,7 +67,33 @@ const Designer = () => {
 
           }
           //third scenario on dragging elements
-      },
+          const isDraggingDesignerElement = active.data?.current?.isDesignerElement;
+
+          const isDraggingDesignerElementOverAnotherDesignerElement = isDroppingOverDesignerElement && isDraggingDesignerElement;
+      
+            if(isDraggingDesignerElementOverAnotherDesignerElement) {
+              const activeId = active.data?.current?.elementId;
+              const overId = over.data?.current?.elementId;
+              const activeElementIndex = elements.findIndex((el) => el.id === activeId);
+              const overElementIndex = elements.findIndex((el) => el.id === overId);
+
+              if (activeElementIndex === -1 || overElementIndex === -1) {
+                throw new Error("Element not found");
+              }
+
+              const activeElement =  {...elements[activeElementIndex]};
+             removeElement(activeId);
+
+             let indexForNewElement = overElementIndex; //if dropping over top half of element
+          if (isDroppingOverDesignerElementBottomHalf){
+            indexForNewElement = overElementIndex + 1; //if dropping over bottom half of element
+          }
+
+             addElement(indexForNewElement, activeElement);
+
+            }    
+
+        },
     });
 
   return (
@@ -80,7 +107,7 @@ const Designer = () => {
           ref={droppable.setNodeRef}
           className={cn(
             "bg-background max-w-[920px] h-full m-auto rounded-xl flex flex-col flex-grow items-center justify-start flex-1 overflow-y-auto",
-            droppable.isOver && "ring-4 ring-primary ring-inset",
+            droppable.isOver && "ring-5 ring-primary ring-inset",
           )}
         >
                {!droppable.isOver && elements.length === 0 && (<p className="text-3xl text-muted-foreground flex flex-grow items-center font-bold">
