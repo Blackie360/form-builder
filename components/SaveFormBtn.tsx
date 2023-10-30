@@ -34,7 +34,7 @@ const SaveFormBtn = ({id}: {id: number}) => {
     }}> 
   <HiSaveAs className="h-6 w-6"/>
  Save
- {loading && <FaSpinner  className="animate-spin"/> }
+ {loading && <FaSpinner  className="animate-spin "/> }
   </Button>;
 }
 

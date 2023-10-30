@@ -12,8 +12,7 @@ export async function GetFormStats() {
     }
     const stats = await prisma.form.aggregate({
         where: {
-            userId: user.id,
-        },
+            userId: user.id,        },
         _sum: {
             visits: true,
             submissions: true,
