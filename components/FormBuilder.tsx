@@ -30,7 +30,7 @@ const FormBuilder = ({form}: {
           <PreviewDialog />
           {!form.published && (
               <>
-              <SaveFormBtn />
+              <SaveFormBtn id={form.id} />
               <PublishFormBtn />
               </>
           )}

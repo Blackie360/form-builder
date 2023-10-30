@@ -167,7 +167,7 @@ function FormCard({ form }: { form: Form }){
     </CardContent>
     <CardFooter className='flex gap-2'>
         {!form.published && (
-          <Button asChild className="w-full mt-2 text-md gap-4 ">
+          <Button asChild className="w-full mt-2 text-md gap-4 h-full ">
             <Link href={`/forms/${form.id}`}>
               View submissions <BiRightArrowAlt />
             </Link>
