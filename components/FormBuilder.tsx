@@ -10,6 +10,7 @@ import SaveFormBtn from "./SaveFormBtn";
 import useDesigner from "./hooks/useDesigner";
 import PreviewDialog from "./PreviewDialog";
 import { ImSpinner2 } from "react-icons/im";
+import { Input } from "./ui/input";
 
 const FormBuilder = ({form}: {
     form: Form
@@ -31,9 +32,10 @@ const FormBuilder = ({form}: {
 
   const sensors = useSensors(mouseSensor, touchSensor);
   useEffect(() => {
+    if(isReady) return;
     const elements = JSON.parse(form.content);
     setElements(elements);
-    const  readyTimeout = setTimeout (() => setisReady(true), 500);
+    const  readyTimeout = setTimeout (() => setIsReady(true), 500);
     return () => clearTimeout(readyTimeout);
   },[form, setElements]);
   if(!isReady) {
@@ -43,6 +45,27 @@ const FormBuilder = ({form}: {
     </div>
   );
     }
+
+    const shareUrl = `${window.location.origin}/submit/${form.shareURL}`;
+    if (form.published) {
+      return (
+        <>
+        <div className="flex flex-col items-center justify-center h-full w-full">
+          <h1 className="text-center text-4xl font-fold text-primary border-b pb-2 mb-10">
+            Form Published 🚀🚀
+          </h1>
+          <h2 className="text-2xl">Share this Form</h2>
+          <h3 className="text-xl text-muted-foreground border-b pb-10">
+            Anyone with the link can view and submit the form 
+          </h3>
+          <div className="my-4 flex flex-col items-center w-full border-b pb-4">
+            <Input className="w-full" readOnly value={shareUrl} />
+          </div>
+        </div>
+        </>
+      )
+    }
+
 
   return <DndContext sensors={sensors}>
      <main className="flex flex-col w-full">
@@ -56,7 +79,7 @@ const FormBuilder = ({form}: {
           {!form.published && (
               <>
               <SaveFormBtn id={form.id} />
-              <PublishFormBtn />
+              <PublishFormBtn id={form.id} />
               </>
           )}
           </div>
