@@ -23,7 +23,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
     <head>
-        <link rel='icon' href='/favicon.ico'/>
+        <link rel='icon' href='/form.png'/>
       </head>
       <body className={inter.className}>
         <NextTopLoader/>
