@@ -10,7 +10,7 @@ import NextTopLoader from 'nextjs-toploader';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'formify',
+  title: 'formify📝',
   description: ' Craft forms that captivate, whether its designing surveys, registrations, or feedback forms🌟, 🚀 Drag-and-Drop Magic,📊 Data Insights.Its time to turn your forms into captivating masterpieces.   ',
 }
 
