@@ -10,8 +10,8 @@ import NextTopLoader from 'nextjs-toploader';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'form builder',
-  description: 'created by blackie',
+  title: 'formify',
+  description: ' Craft forms that captivate, whether its designing surveys, registrations, or feedback forms🌟, 🚀 Drag-and-Drop Magic,📊 Data Insights.Its time to turn your forms into captivating masterpieces.   ',
 }
 
 export default function RootLayout({
@@ -22,6 +22,9 @@ export default function RootLayout({
   return (
     <ClerkProvider>
     <html lang="en">
+    <head>
+        <link rel='icon' href='/favicon.ico'/>
+      </head>
       <body className={inter.className}>
         <NextTopLoader/>
       <DesignerContextProvider>

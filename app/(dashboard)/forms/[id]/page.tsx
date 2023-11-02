@@ -1,16 +1,17 @@
 import { GetFormById, GetFormsWithSubmissions } from "@/actions/form";
-import FormBuilder from "@/components/FormBuilder";
+import { ElementsType, FormElementInstance } from "@/components/FormElements";
 import FormLinkShare from "@/components/FormLinkShare ";
 import VisitBtn from "@/components/VisitBtn ";
-import React, { ReactNode } from "react";
-import { SingleStatsCard } from "../../page";
-import { LuView } from "react-icons/lu";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { format, formatDistance } from "date-fns";
+import { ReactNode } from "react";
 import { FaWpforms } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
+import { LuView } from "react-icons/lu";
 import { TbArrowBounce } from "react-icons/tb";
-import { ElementsType, FormElementInstance } from "@/components/FormElements";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { formatDistance } from "date-fns";
+import { SingleStatsCard } from "../../page";
 
 async function FormDetails({
   params,
@@ -113,6 +114,11 @@ type Row = {[key: string]: string} & {
   formElements.forEach(element => {
     switch (element.type) {
       case "TextField":
+      case "NumberField":
+      case "TextAreaField":
+      case "DateField":
+      case "SelectField":
+      case "CheckboxField":
         columns.push({
           id: element.id,
           label: element.extraAttributes?.label,
@@ -175,7 +181,20 @@ type Row = {[key: string]: string} & {
     </>
   );
 }
-function RowCell({type, value}: {type: ElementsType, value: string}) {
+function RowCell({ type, value }: { type: ElementsType; value: string }) {
   let node: ReactNode = value;
-  return <TableCell>{node}</TableCell>
+
+  switch (type) {
+    case "DateField":
+      if (!value) break;
+      const date = new Date(value);
+      node = <Badge variant={"outline"}>{format(date, "dd/MM/yyyy")}</Badge>;
+      break;
+    case "CheckboxField":
+      const checked = value === "true";
+      node = <Checkbox checked={checked} disabled />;
+      break;
+  }
+
+  return <TableCell>{node}</TableCell>;
 }

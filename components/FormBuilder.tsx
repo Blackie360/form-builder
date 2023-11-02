@@ -20,7 +20,7 @@ import Confetti from "react-confetti";
 const FormBuilder = ({form}: {
     form: Form
 }) => {
-  const {setElements } = useDesigner();
+  const { setElements, setSelectedElement } = useDesigner();
   const [isReady, setIsReady] = useState(false);
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -40,9 +40,11 @@ const FormBuilder = ({form}: {
     if(isReady) return;
     const elements = JSON.parse(form.content);
     setElements(elements);
+    setSelectedElement(null);
+    setIsReady(true);
     const  readyTimeout = setTimeout (() => setIsReady(true), 500);
     return () => clearTimeout(readyTimeout);
-  },[form, setElements]);
+  },[form, setElements, isReady, setSelectedElement]);
   if(!isReady) {
     return (
     <div className="flex flex-col items-center justify-center w-full  h-full">

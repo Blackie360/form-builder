@@ -1,4 +1,4 @@
-import React, { startTransition, useTransition } from 'react'
+import React, {  useTransition } from 'react'
 import { Button } from './ui/button';
 import { MdOutlinePublish } from 'react-icons/md';
 import {
@@ -12,7 +12,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { FaIcons } from 'react-icons/fa';
+import {  FaSpinner } from 'react-icons/fa';
 import { toast } from './ui/use-toast';
 import { PublishForm } from '@/actions/form';
 import { useRouter } from 'next/navigation';
@@ -65,7 +65,7 @@ async function publishForm() {
         startTransition(publishForm);
 
       }} >
-        Publish {loading && <FaIcons className="animate-spin h-6 w-6" />}       
+        Publish {loading && <FaSpinner className="animate-spin h-6 w-6" />}       
   </AlertDialogAction>
        </AlertDialogFooter>
     </AlertDialogContent>

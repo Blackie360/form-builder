@@ -166,7 +166,7 @@ function FormCard({ form }: { form: Form }){
       {form.description || "No Description"}
     </CardContent>
     <CardFooter className='flex gap-2'>
-        {!form.published && (
+        {form.published && (
           <Button asChild className="w-full mt-2 text-md gap-4 h-full ">
             <Link href={`/forms/${form.id}`}>
               View submissions <BiRightArrowAlt />
