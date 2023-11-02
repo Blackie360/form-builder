@@ -88,7 +88,7 @@ function StatsCard(props: StatsCardProps) {
   );
 }
 
-function SingleStatsCard({
+export function SingleStatsCard({
   title,
   value,
   icon,
