@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { Toaster } from '@/components/ui/toaster'
 import DesignerContextProvider from '@/components/context/DesignerContext'
 import NextTopLoader from 'nextjs-toploader';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +24,7 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
     <head>
-        <link rel='icon' href='/form.png'/>
+        <link rel='icon' href='/app/form.ico'/>
       </head>
       <body className={inter.className}>
         <NextTopLoader/>
@@ -36,6 +37,7 @@ export default function RootLayout({
             >
         
               {children}
+              <Analytics />
               <Toaster />
             </ThemeProvider>
       </DesignerContextProvider>
