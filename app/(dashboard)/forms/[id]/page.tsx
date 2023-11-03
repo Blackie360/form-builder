@@ -1,4 +1,4 @@
-import { GetFormById, GetFormWithSubmissions } from "@/actions/form";
+import { GetFormById, getFormWithSubmissions } from "@/actions/form";
 import { ElementsType, FormElementInstance } from "@/components/FormElements";
 import FormLinkShare from "@/components/FormLinkShare ";
 import VisitBtn from "@/components/VisitBtn ";
@@ -101,7 +101,7 @@ type Row = { [key: string]: string } & {
 };
 
 async function SubmissionsTable({ id }: { id: number }) {
-  const form = await GetFormWithSubmissions(id);
+  const form = await getFormWithSubmissions(id);
 
   if (!form) {
     throw new Error("form not found");
