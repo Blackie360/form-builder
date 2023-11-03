@@ -13,7 +13,7 @@ import VisitBtn from "@/components/VisitBtn ";
 import FormLinkShare from "@/components/FormLinkShare ";
 import { SingleStatsCard } from "../../page";
 
-async function FormDetailPage({
+async function FormDetail({
   params,
 }: {
   params: {
@@ -94,7 +94,7 @@ async function FormDetailPage({
   );
 }
 
-export default FormDetailPage;
+export default FormDetail;
 
 type Row = { [key: string]: string } & {
   submittedAt: Date;
